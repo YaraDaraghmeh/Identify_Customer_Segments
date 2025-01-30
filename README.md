@@ -1,125 +1,121 @@
-# Identify Customer Segments
+# Customer Segments Analysis
 
-## Table of Contents
-- [Project Overview](#project-overview)
-- [Data](#data)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Methodology](#methodology)
-- [Results](#results)
-- [Project Structure](#project-structure)
-- [Acknowledgments](#acknowledgments)
-- [License](#license)
+A data science project that uses unsupervised learning to identify core customer segments from German demographics data.
 
----
+## Overview
 
-## Project Overview
-This project applies **unsupervised learning techniques** to identify customer segments within the demographics of a mail-order sales company in Germany. The goal is to analyze the general population and existing customer data to find **core customer groups** that are over-represented among customers. These insights can direct targeted marketing campaigns to maximize returns. 
+This project analyzes demographics data to identify distinct customer segments for a German mail-order sales company. By comparing general population data with existing customer profiles, we identify over-represented customer groups to enable targeted marketing strategies.
 
-**Why Customer Segmentation?**  
-Segmentation helps businesses tailor strategies to specific groups, improving engagement and efficiency. Clustering is ideal for discovering hidden patterns in unlabeled data, making it perfect for this use case.
+### Why Customer Segmentation?
 
----
+Customer segmentation allows businesses to:
+- Tailor marketing strategies to specific demographic groups
+- Improve customer engagement through targeted messaging
+- Optimize marketing resource allocation
+- Discover hidden patterns in customer behavior
 
-## Data
-The project uses four datasets:
-1. **`Udacity_AZDIAS_Subset.csv`**: Demographics data for the general population (891,211 persons, 85 features).  
-2. **`Udacity_CUSTOMERS_Subset.csv`**: Demographics data for customers (191,652 persons, 85 features).  
-3. **`Data_Dictionary.md`**: Detailed descriptions of all features (e.g., household, building, neighborhood attributes).  
-4. **`AZDIAS_Feature_Summary.csv`**: Summary of feature attributes, including encoded missing values (e.g., `-1`, `0`, `9`).  
+## Data Sources
 
-### Key Data Characteristics
-- **Features**: Include person-level (age, gender), household (income, family type), and regional (building type, neighborhood) attributes.  
-- **Missing Values**: Encoded with placeholders (e.g., `-1`, `0`, `XX`), converted to `NaN` during preprocessing.  
+The analysis uses four primary datasets:
 
----
+| Dataset | Description | Size | Features |
+|---------|-------------|------|----------|
+| `Udacity_AZDIAS_Subset.csv` | General population demographics | 891,211 persons | 85 features |
+| `Udacity_CUSTOMERS_Subset.csv` | Customer demographics | 191,652 persons | 85 features |
+| `Data_Dictionary.md` | Feature descriptions | - | - |
+| `AZDIAS_Feature_Summary.csv` | Feature attributes summary | - | - |
+
+Features include person-level attributes (age, gender), household information (income, family type), and regional characteristics (building type, neighborhood).
 
 ## Installation
 
-### Dependencies
-- **Python 3.7+**
-- Libraries:  
-  ```bash
-  pandas numpy matplotlib seaborn scikit-learn jupyter
+### Prerequisites
 
-  Setup
-Clone the repository:
+- Python 3.7+
+- Git
 
-bash
-Copy
-git clone https://github.com/your-username/identify-customer-segments.git
-cd identify-customer-segments
-Install dependencies:
+### Required Libraries
 
-bash
-Copy
-pip install -r requirements.txt  # Optional: Create a virtual environment first
-Download datasets from Udacity and place them in the data/ directory.
+```bash
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
+jupyter
+```
 
-sage
-Launch Jupyter Notebook:
+### Setup Instructions
 
-bash
-Copy
-jupyter notebook Identify_Customer_Segments.ipynb
-Execute Cells Sequentially:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/YaraDaraghmeh/identify-customer-segments.git
+   cd identify-customer-segments
+   ```
 
-Data Preprocessing: Clean missing values, encode features, and standardize data.
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Dimensionality Reduction: Apply PCA to reduce feature space.
+3. Download the datasets and place them in the `data/` directory
 
-Clustering: Use K-Means to segment the population.
+## Usage
 
-Analysis: Compare customer vs. population clusters to identify target groups.
+1. Launch Jupyter Notebook:
+   ```bash
+   jupyter notebook Identify_Customer_Segments.ipynb
+   ```
 
-Methodology
-1. Data Preprocessing
-Handling Missing Values:
+2. Execute the notebook cells sequentially to:
+   - Preprocess the demographics data
+   - Reduce dimensionality using PCA
+   - Perform clustering analysis
+   - Compare population and customer segments
 
-Convert encoded values (e.g., -1, 0) to NaN using AZDIAS_Feature_Summary.csv.
+## Methodology
 
-Drop columns with >30% missing data and rows with >10 missing values.
+### 1. Data Preprocessing
 
-Feature Engineering:
+- **Missing Value Treatment**
+  - Convert encoded missing values to NaN
+  - Drop columns with >30% missing data
+  - Remove rows with >10 missing values
+  
+- **Feature Engineering**
+  - Impute missing values using median/mode
+  - One-hot encode categorical variables
+  - Standardize numerical features
 
-Imputation: Fill missing values using median (numerical) or mode (categorical).
+### 2. Dimensionality Reduction
 
-Encoding: One-hot encode categorical variables (e.g., OST_WEST_KZ).
+- Apply PCA to reduce 85 features to 30 principal components
+- Retain approximately 85% of variance
+- Analyze component interpretations for demographic insights
 
-Standardization: Scale features using StandardScaler.
+### 3. Clustering Analysis
 
-2. Dimensionality Reduction (PCA)
-Reduce 85 features to 30 principal components, retaining ~85% variance.
+- Implement K-Means clustering
+- Use Elbow Method to determine optimal cluster count
+- Compare cluster distributions between general population and customers
 
-Visualize components to interpret demographic trends.
+## Results
 
-3. Clustering (K-Means)
-Use the Elbow Method to determine optimal clusters (e.g., k=5).
+Key findings from the analysis:
 
-Fit model on the general population and predict clusters for customers.
+- Identified two primary target segments (Clusters 3 and 5)
+- Target segments show 2.5x higher representation in customer base
+- Key characteristics of target segments:
+  - High-income urban households
+  - Middle-aged families with financial planning focus
 
-Key Metric: Compare cluster distributions to identify over-represented customer segments.
 
-Results
-Cluster 3 and Cluster 5 were 2.5x more prevalent in customer data vs. the general population.
 
-Key Characteristics of target clusters:
+## Acknowledgments
 
-High-income households in urban areas.
+- Data provided by Bertelsmann Arvato Analytics
+- Project guidance from Udacity Data Scientist Nanodegree Program
 
-Middle-aged families with a focus on financial planning.
+## License
 
-Visualizations:
-
-PCA component analysis (e.g., Component 1 correlates with wealth).
-
-Cluster distribution bar charts (population vs. customers).
-
-PCA Visualization
-Example: PCA Components Explained Variance
-cknowledgments
-Data Provided By: Bertelsmann Arvato Analytics.
-
-Project Guidance: Udacity Data Scientist Nanodegree Program.
-
-Libraries: pandas, scikit-learn, matplotlib.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
